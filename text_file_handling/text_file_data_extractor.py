@@ -29,7 +29,6 @@ class TextFileDataExtractor:
         destinations_data = self._file_contents[destinations_text_end: -1]
         """
 
-
     def _insert_vertexes_into_adjacency_list(self, adjacency_list_graph):
         # Seperating edges text
         nodes_text_end = self._file_contents.find("Nodes:") + len("Nodes:")

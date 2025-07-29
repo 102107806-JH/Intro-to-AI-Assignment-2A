@@ -9,12 +9,13 @@ class TextFileDataExtractor:
     def get_adjacency_list_graph(self):
 
         adjacency_list_graph = AdjacencyListGraph() # Initialize the adjacency list graph
+
         adjacency_list_graph = self._insert_vertexes_into_adjacency_list(adjacency_list_graph) # Insert vertexes into adjacency list grap
 
-        print("end")
+        adjacency_list_graph = self._insert_edges_into_adjacency_list(adjacency_list_graph)
+
         """
-        edges_text_start = self._file_contents.find("Edges:")
-        edges_text_end = edges_text_start + len("Edges:")
+        
 
         origin_text_start = self._file_contents.find("Origin:")
         origin_text_end = origin_text_start + len("Origin:")
@@ -33,9 +34,9 @@ class TextFileDataExtractor:
         # Seperating edges text
         nodes_text_end = self._file_contents.find("Nodes:") + len("Nodes:")
         edges_text_start = self._file_contents.find("Edges:")
-        nodes_data = self._file_contents[nodes_text_end: edges_text_start]
+        nodes_data_string = self._file_contents[nodes_text_end: edges_text_start]
+        nodes_data_string = nodes_data_string.replace(" ", "").replace("\n", "")# Removing out all spaces and newline chars
 
-        nodes_data_string = nodes_data.replace(" ", "").replace("\n", "")# Removing out all spaces and newline chars
         data_buffer = ""
         for c in nodes_data_string:
 
@@ -59,10 +60,38 @@ class TextFileDataExtractor:
 
         return adjacency_list_graph
 
-    def
+    def _insert_edges_into_adjacency_list(self, adjacency_list_graph):
 
+        edges_text_end = self._file_contents.find("Edges:") + len("Edges:")
+        origin_text_start = self._file_contents.find("Origin:")
+        edges_data_string = self._file_contents[edges_text_end: origin_text_start]
+        edges_data_string = edges_data_string.replace(" ", "").replace("\n", "")  # Removing out all spaces and newline chars
 
+        edges_data_string = edges_data_string.replace("(", "", 1)
+        edges_data_string += "("
 
+        data_buffer = ""
+        for c in edges_data_string:
+
+            if c == "(":
+                cost = int(data_buffer)
+                adjacency_list_graph.insert_edge_into_vertex(origin_id, destination_id, cost)
+                data_buffer = ""
+                continue
+            elif c == ",":
+                origin_id = int(data_buffer)
+                data_buffer = ""
+                continue
+            elif c == ")":
+                destination_id = int(data_buffer)
+                data_buffer = ""
+                continue
+            elif c == ":":
+                continue
+
+            data_buffer += c
+
+        return adjacency_list_graph
 
 
 

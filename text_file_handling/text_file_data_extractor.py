@@ -14,20 +14,9 @@ class TextFileDataExtractor:
 
         adjacency_list_graph = self._insert_edges_into_adjacency_list(adjacency_list_graph)
 
-        """
-        
+        origin = self._extract_origin()
 
-        origin_text_start = self._file_contents.find("Origin:")
-        origin_text_end = origin_text_start + len("Origin:")
-
-        destinations_text_start = self._file_contents.find("Destinations:")
-        destinations_text_end = destinations_text_start + len("Destinations:")
-
-        # Placing the data into separate strings
-        edges_data = self._file_contents[edges_text_end: origin_text_start]
-        origin_data = self._file_contents[origin_text_end: destinations_text_start]
-        destinations_data = self._file_contents[destinations_text_end: -1]
-        """
+        destinations_list = self._extract_destinations()
 
     def _insert_vertexes_into_adjacency_list(self, adjacency_list_graph):
         # Seperating edges text
@@ -91,6 +80,33 @@ class TextFileDataExtractor:
             data_buffer += c
 
         return adjacency_list_graph
+
+    def _extract_origin(self):
+        origin_text_end = self._file_contents.find("Origin:") + len("Origin:")
+        destinations_text_start = self._file_contents.find("Destinations:")
+        origin_data_string = self._file_contents[origin_text_end: destinations_text_start]
+        origin_data_string = origin_data_string.replace(" ", "").replace("\n", "")  # Removing out all spaces and newline chars
+
+        return int(origin_data_string)
+
+    def _extract_destinations(self):
+        destinations_text_end = self._file_contents.find("Destinations:") + len("Destinations:")
+        destinations_data_string = self._file_contents[destinations_text_end: -1]
+        destinations_data_string = destinations_data_string.replace(" ", "").replace("\n", "")  # Removing out all spaces and newline chars
+
+        destinations_data_string += ";"
+        data_buffer = ""
+        destinations_list = []
+        for c in destinations_data_string:
+
+            if c == ";":
+                destinations_list.append(int(data_buffer))
+                data_buffer = ""
+                continue
+            data_buffer += c
+
+        return destinations_list
+
 
 
 

@@ -6,7 +6,7 @@ class TextFileDataExtractor:
         self._file_contents = text_data_file.read()
         text_data_file.close()
 
-    def get_adjacency_list_graph(self):
+    def extract_text_file_data(self):
 
         adjacency_list_graph = AdjacencyListGraph() # Initialize the adjacency list graph
 
@@ -17,6 +17,8 @@ class TextFileDataExtractor:
         origin = self._extract_origin()
 
         destinations_list = self._extract_destinations()
+
+        return ExtractedTextFileData(adjacency_list_graph, origin, destinations_list)
 
     def _insert_vertexes_into_adjacency_list(self, adjacency_list_graph):
         # Seperating edges text
@@ -106,6 +108,12 @@ class TextFileDataExtractor:
             data_buffer += c
 
         return destinations_list
+
+class ExtractedTextFileData:
+    def __init__(self, adjacency_list_graph, origin, destinations_list):
+        self.adjacency_list_graph = adjacency_list_graph
+        self.origin = origin
+        self.destinations_list = destinations_list
 
 
 

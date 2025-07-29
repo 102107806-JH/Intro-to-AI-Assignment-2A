@@ -1,3 +1,5 @@
+from vertex import Vertex
+
 class AdjacencyListGraph:
     def __init__(self):
-        pass
+        self._adjacency_list = []

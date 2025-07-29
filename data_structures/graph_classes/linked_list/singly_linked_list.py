@@ -1,4 +1,4 @@
-from data_structures.linked_list.list_node import ListNode
+from data_structures.graph_classes.linked_list.list_node import ListNode
 
 class SinglyLinkedList:
     def __init__(self):

@@ -1,4 +1,4 @@
-from linked_list.singly_linked_list import SinglyLinkedList
+from data_structures.graph_classes.linked_list.singly_linked_list import SinglyLinkedList
 
 class Vertex:
     def __init__(self, id, x, y):

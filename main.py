@@ -1,4 +1,4 @@
-from graph_init.graph_init import GraphInitialization
+from text_file_handling.text_file_data_extractor import TextFileDataExtractor
 
-graphInit = GraphInitialization(r"data/PathFinder-test.txt")
-graphInit.get_adjacency_list_graph()
+text_file_extractor = TextFileDataExtractor(r"data/PathFinder-test.txt")
+text_file_extractor.get_adjacency_list_graph()

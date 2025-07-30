@@ -117,9 +117,21 @@ class TextFileDataExtractor:
 
 class ExtractedTextFileData:  # Helper object that acts as a struct was added in this file for sake of simplicity #
     def __init__(self, adjacency_list_graph, origin, destinations_list):
-        self.adjacency_list_graph = adjacency_list_graph
-        self.origin = origin
-        self.destinations_list = destinations_list
+        self._adjacency_list_graph = adjacency_list_graph
+        self._origin = origin
+        self._destinations_list = destinations_list
+
+    @property
+    def adjacency_list_graph(self):
+        return self._adjacency_list_graph
+
+    @property
+    def origin(self):
+        return self._origin
+
+    @property
+    def destinations_list(self):
+        return self._destinations_list
 
 
 

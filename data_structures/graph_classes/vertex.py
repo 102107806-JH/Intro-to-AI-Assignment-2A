@@ -1,5 +1,6 @@
 from data_structures.graph_classes.linked_list.singly_linked_list import SinglyLinkedList
 
+
 class Vertex:
     def __init__(self, id, x, y):
         self._id = id  # The id (number of the vertex) #

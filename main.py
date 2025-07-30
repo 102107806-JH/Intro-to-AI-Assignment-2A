@@ -1,28 +1,67 @@
+import sys
 from text_file_handling.text_file_data_extractor import TextFileDataExtractor
 from textbook_abstractions.problem import Problem
+from textbook_abstractions.node import Node  # Import Node to access the static methods
+from search_algorithms.breadth_first_search import breadth_first_search
 
-text_file_extractor = TextFileDataExtractor(r"data/PathFinder-test.txt")  # Create object to extract the text file data #
 
-extracted_text_file_data_object = text_file_extractor.extract_text_file_data()  # Extract the data from text file and store inside wrapper object #
+def get_solution_path(node):
+    """
+    Reconstructs the path from the initial state to the given goal node.
+    Returns a list of node states representing the path.
+    """
+    path = []
+    current = node
+    while current:
+        path.append(str(current.state))  # Convert to string for output
+        current = current.parent
+    return " ".join(path[::-1])  # Reverse the list to get start to goal order and join
 
-problem = Problem(extracted_text_file_data_object)  # Transfer the extracted text file data object into a problem
 
-# PROBLEM DEMONSTRATION (The graph loaded is the one from the task sheet)
+def main():
+    # Ensure correct number of arguments
+    if len(sys.argv) != 3:
+        print("Usage: python main.py <filename> <method>")
+        sys.exit(1)
 
-state = 3
-action = 5
-new_state = 5
+    filename = sys.argv[1]
+    method = sys.argv[2].lower()  # Convert method to lowercase for case-insensitivity
 
-# Prints a list of actions available from the current node.
-# The actions are expressed as integers. These are the number of the nodes that can be traversed to
-print("Available actions from state " + str(state) + ":", problem.actions(state=state))
+    # Reset node count before starting the search for a clean count
+    Node.reset_node_count()
 
-# Gives the integer of the node that will be traversed to after the action
-# This just returns the action integer because the action states which node will be travelled to
-print("Result state after performing action " + str(action) + " on state " + str(state) + ":", problem.result(state=state, action=action))
+    try:
+        text_file_extractor = TextFileDataExtractor(filename)
+        extracted_text_file_data_object = text_file_extractor.extract_text_file_data()
+        problem = Problem(extracted_text_file_data_object)
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+        sys.exit(1)
+    except Exception as e:
+        print(f"Error processing file '{filename}': {e}")
+        sys.exit(1)
 
-# Gives the cost of performing a given action on a state
-print("Cost of moving from state " + str(state) + " to " + str(new_state) + ":", problem.action_cost(state=state, action=action, new_state=new_state))
+    solution_node = None
+    if method == "bfs":
+        solution_node = breadth_first_search(problem)
+    else:
+        print(f"Error: Unknown search method '{method}'. Supported methods: bfs")
+        sys.exit(1)
 
-# Returns a boolean indicating whether state is a goal state
-print("Is the state a goal?:", problem.is_goal(state))
+    # Output results
+    if solution_node:
+        # filename method
+        print(f"{filename.split('/')[-1]} {method}")  # Extract just the file name
+        # goal number_of_nodes
+        print(f"{solution_node.state} {Node.get_node_count()}")
+        # path
+        print(get_solution_path(solution_node))
+    else:
+        # If no solution is found, print a failure message
+        # The prompt only specifies output for "when a goal can be reached".
+        print(f"{filename.split('/')[-1]} {method}")
+        print("No solution found.")
+
+
+if __name__ == "__main__":
+    main()

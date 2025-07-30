@@ -3,13 +3,16 @@ class ListNode:
         self._data = data  # The data of the linked list node #
         self._next = None  # The link to the next node #
 
-    def get_data(self):  # Get the data of the node #
+    @property
+    def data(self):  # Get the data of the node #
         return self._data
 
-    def get_next(self):  # Get the next node #
+    @property
+    def next(self):  # Get the next node #
         return self._next
 
-    def set_next(self, next):  # Set the next node #
+    @next.setter
+    def next(self, next):  # Set the next node #
         self._next = next
 
 

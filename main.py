@@ -1,5 +1,5 @@
 from text_file_handling.text_file_data_extractor import TextFileDataExtractor
-from problem.problem import Problem
+from textbook_abstractions.problem import Problem
 
 text_file_extractor = TextFileDataExtractor(r"data/PathFinder-test.txt")  # Create object to extract the text file data #
 

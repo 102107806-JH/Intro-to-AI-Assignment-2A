@@ -1,4 +1,3 @@
-from problem.node import Node
 
 class Problem:
     def __init__(self, extracted_text_file_data_object):  # Takes a extracted text file object  #

@@ -12,5 +12,8 @@ class SinglyLinkedList:
             self._tail = self._head # Set the tail to the head because there is only 1 element
         # The list is not empty
         else:
-            self._tail.next_setter(ListNode(data)) # Construct a list node after the tail
-            self._tail = self._tail.next_getter() # Update the location of the tail
+            self._tail.set_next(ListNode(data)) # Construct a list node after the tail
+            self._tail = self._tail.get_next() # Update the location of the tail
+
+    def get_head(self):
+        return self._head

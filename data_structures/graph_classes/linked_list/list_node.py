@@ -3,14 +3,13 @@ class ListNode:
         self._data = data
         self._next = None
 
-    def data_getter(self):
+    def get_data(self):
         return self._data
 
-    def next_getter(self):
+    def get_next(self):
         return self._next
 
-
-    def next_setter(self, next):
+    def set_next(self, next):
         self._next = next
 
 

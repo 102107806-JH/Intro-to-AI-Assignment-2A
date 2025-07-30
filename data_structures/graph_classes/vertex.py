@@ -9,3 +9,11 @@ class Vertex:
 
     def add_edge(self, edge):
         self._edges.append(edge) # Append an edge to the singularly linked list
+
+    def extract_edges_as_list(self):
+        current_node = self._edges.get_head()
+        edges_list = []
+        while current_node is not None:
+            edges_list.append(current_node.get_data())
+            current_node = current_node.get_next()
+        return edges_list

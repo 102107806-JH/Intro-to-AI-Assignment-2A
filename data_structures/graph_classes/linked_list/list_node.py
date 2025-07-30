@@ -1,15 +1,15 @@
 class ListNode:
     def __init__(self, data):
-        self._data = data
-        self._next = None
+        self._data = data  # The data of the linked list node #
+        self._next = None  # The link to the next node #
 
-    def get_data(self):
+    def get_data(self):  # Get the data of the node #
         return self._data
 
-    def get_next(self):
+    def get_next(self):  # Get the next node #
         return self._next
 
-    def set_next(self, next):
+    def set_next(self, next):  # Set the next node #
         self._next = next
 
 

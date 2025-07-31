@@ -23,7 +23,6 @@ def greed_best_first_search(problem):
     return None
 
 def expand(problem, node):
-
     state = node.state  # The state of the parent node #
     children = []  # List to store all the child nodes #
 

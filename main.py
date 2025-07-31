@@ -3,7 +3,7 @@ from text_file_handling.text_file_data_extractor import TextFileDataExtractor
 from textbook_abstractions.problem import Problem
 from textbook_abstractions.node import Node  # Import Node to access the static methods
 from search_algorithms.breadth_first_search import breadth_first_search
-
+from search_algorithms.depth_first_search import depth_first_search
 
 def get_solution_path(node):
     """
@@ -45,7 +45,7 @@ def main():
     if method == "bfs":
         solution_node = breadth_first_search(problem)
     elif method == "dfs":
-
+        solution_node = depth_first_search(problem, expansion_depth_limit=4)
     else:
         print(f"Error: Unknown search method '{method}'. Supported methods: bfs")
         sys.exit(1)

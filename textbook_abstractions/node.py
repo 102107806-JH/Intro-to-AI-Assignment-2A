@@ -10,6 +10,7 @@ class Node:
         self._action = action  # Action that got the node from parent state to current node state #
         self._path_cost = path_cost  # Path cost will need to be saved whereas heuristic cost won't #
         self._total_cost = path_cost + heuristic_cost  # The total cost this is what the priority queue will sort by #
+        self._order_pushed_into_collection = None  # Used to indicate chronological order in which node was added to a specific collection #
 
         # Increment the node count every time a new Node instance is created
         Node._node_count += 1
@@ -33,6 +34,14 @@ class Node:
     @property
     def total_cost(self):
         return self._total_cost
+
+    @property
+    def order_pushed_into_collection(self):
+        return self._order_pushed_into_collection
+
+    @order_pushed_into_collection.setter
+    def order_pushed_into_collection(self, order_pushed_into_collection):
+        self._order_pushed_into_collection = order_pushed_into_collection
 
     @staticmethod
     def get_node_count():

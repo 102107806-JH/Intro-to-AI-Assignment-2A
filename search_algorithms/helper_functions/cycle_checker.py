@@ -9,7 +9,5 @@ def is_cycle(node, cycle_depth_limit):
         cycle_depth_limit -= 1  # Decrement depth limit #
         current_node = current_node.parent  # Move up the tree #
 
-
-
     return False
 

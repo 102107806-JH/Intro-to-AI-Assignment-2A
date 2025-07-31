@@ -37,6 +37,8 @@ class Problem:
 
         return None  # There is no match this should never happen #
 
+    def state_distance_to_goal(self, state):
+
     def is_goal(self, state):
         return state in self._goal_states  # Seeing if the state is in the goal states #
 

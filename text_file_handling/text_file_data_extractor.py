@@ -31,6 +31,10 @@ class TextFileDataExtractor:
         nodes_data_string = nodes_data_string.replace(" ", "").replace("\n", "")
         # Removing out all spaces and newline chars #
 
+        # Raise exception data string is empty means that no nodes were provided #
+        if len(nodes_data_string) == 0:
+            raise Exception("No nodes have been provided in the text file! Please provide nodes!")
+
         data_buffer = ""  # Stores the data in the following for loop #
         for c in nodes_data_string:  # Loop through all chars in the node string data
 
@@ -61,6 +65,10 @@ class TextFileDataExtractor:
         edges_data_string = self._file_contents[edges_text_end: origin_text_start]  # Slice nodes data #
         edges_data_string = edges_data_string.replace(" ", "").replace("\n", "")
         # Removing out all spaces and newline chars #
+
+        # No edges provided further processing is unnecessary #
+        if len(edges_data_string) == 0:
+            return adjacency_list_graph
 
         # Below two lines format the string to make dealing with it easier #
         edges_data_string = edges_data_string.replace("(", "", 1)
@@ -99,6 +107,10 @@ class TextFileDataExtractor:
         origin_data_string = origin_data_string.replace(" ", "").replace("\n", "")
         # Removing out all spaces and newline chars #
 
+        # Raise exception data string is empty means that no origin was provided #
+        if len(origin_data_string) == 0:
+            raise Exception("No origin has been provided in the text file! Please provide origin!")
+
         return int(origin_data_string)  # No need for loop the origin data consists of one integer
 
     def _extract_destinations(self):
@@ -109,6 +121,10 @@ class TextFileDataExtractor:
         # Slice out the destinations' data (no end index needs to be calculated because it goes up string end) #
         destinations_data_string = destinations_data_string.replace(" ", "").replace("\n", "")
         # Removing out all spaces and newline chars #
+
+        # Raise exception data string is empty means that no origin was provided #
+        if len(destinations_data_string) == 0:
+            raise Exception("No destination(s) has been provided in the text file! Please provide a destination(s)!")
 
         destinations_data_string += ";"  # Formatting string to make it easier to deal with #
 

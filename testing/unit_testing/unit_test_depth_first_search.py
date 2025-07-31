@@ -23,7 +23,7 @@ class TestDFS(unittest.TestCase):
 
     def test_case_1(self):
         # Problem generation and search execution
-        problem = self.generate_problem(r"unit_testing_data/unit_test_demo.txt")
+        problem = self.generate_problem(r"unit_testing_data/depth_first_search_data/unit_test_demo.txt")
         solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=2)
 
         expected_path_list = [2, 1, 3, 2, 1, 4]  # Expected path list #
@@ -33,7 +33,8 @@ class TestDFS(unittest.TestCase):
 
     def test_case_2(self):
         # Problem generation and search execution
-        problem = self.generate_problem(r"unit_testing_data/unit_test_demo.txt")
+        problem = self.generate_problem(
+            r"unit_testing_data/depth_first_search_data/unit_test_demo.txt")
         solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=2)
 
         expected_path_list = [2, 1, 3, 2, 1, 5]  # Expected path list #

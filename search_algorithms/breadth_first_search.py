@@ -1,62 +1,50 @@
-from collections import deque
 from textbook_abstractions.node import Node
+from data_structures.queues.fifo_queue import FifoQueue
 
 
 def breadth_first_search(problem):
     """
-    Breadth-First Search (BFS) to find a destination node or failure
+    Performs a Breadth-First Search (BFS) to find a solution node or failure.
 
     Args:
         problem: An instance of the Problem class, containing the initial state,
                  goal states, and methods for actions, result, and goal checking.
 
     Returns:
-        A Node object representing the solution path if a goal (destination) is found,
+        A Node object representing the solution path if a goal is found,
         otherwise None.
     """
-
-    # Create the initial node using the problem's initial state
     node = Node(problem.initial_state)
 
-    # Check if the initial state is already a goal state
     if problem.is_goal(node.state):
         return node
 
-    # Initialize the frontier as a deque FIFO operation
-    frontier = deque([node])
+    # Initialize the frontier using the custom FifoQueue
+    frontier = FifoQueue()  # Use custom FifoQueue
+    frontier.append(node)  # Add the initial node
 
-    # Record states that have been reached to avoid cycles and redundant processing
     reached = {problem.initial_state}
 
-    while frontier:
-        # Get the next node from the front of the queue
-        current_node = frontier.popleft()
-
-        # Expand the current node to generate child nodes
+    while frontier: # This now works due to __bool__ method in FifoQueue
+        current_node = frontier.popleft()  # Use popleft from custom queue
+        # Check if the current node is a goal if not return the path
         for action in problem.actions(current_node.state):
-            child_state = problem.result(current_node.state, action)  # Get the result of the action
-            cost_to_child = problem.action_cost(current_node.state, action, child_state)  # Get the cost of the action
-            child_path_cost = current_node.path_cost + cost_to_child  # Calculate the path cost of the child node
-            # Create a new child node and update the current params
-            child_node = Node(
+            child_state = problem.result(current_node.state, action)
+            cost_to_child = problem.action_cost(current_node.state, action, child_state)
+            child_path_cost = current_node.path_cost + cost_to_child
+
+            child_node = Node( # Create a new node and set/update attributes
                 state=child_state,
                 parent=current_node,
                 action=action,
                 path_cost=child_path_cost
             )
-
-            # Check if the child state is a goal
+            # Check if the child node is a goal or not
             if problem.is_goal(child_node.state):
                 return child_node
-
-            # if s is not in reached then
-            # Check if the child state has already been reached
+            # Check if the child node is already in the queue or not
             if child_node.state not in reached:
-                # add s to reached
                 reached.add(child_node.state)
-                # add child to frontier
                 frontier.append(child_node)
 
-    # return failure
-    # If the frontier becomes empty and no goal is found, return None
     return None

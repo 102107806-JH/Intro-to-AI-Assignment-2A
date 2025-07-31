@@ -116,7 +116,7 @@ class TextFileDataExtractor:
         destinations_list = []  # A list that will store all the destinations as integers #
         for c in destinations_data_string:
 
-            if c == ";":  # Have found a destination #
+            if c == ";" and len(data_buffer) != 0:  # Have found a destination #
                 destinations_list.append(int(data_buffer))  # Append the destination to the list #
                 data_buffer = ""  # Reset the data buffer #
                 continue  # Don't want the current char added to the data buffer #

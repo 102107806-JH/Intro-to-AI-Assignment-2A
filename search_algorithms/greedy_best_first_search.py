@@ -29,8 +29,8 @@ def expand(problem, node):
     children = []  # List to store all the child nodes #
 
     for action in problem.actions(state):  # Go through all the states #
-
         new_state = problem.result(state, action)  # Get the state that results from an action #
-        children.append(Node(state=new_state, parent=node, action=action, path_cost=0, heuristic_cost=))  # Append a new child node using the node constructor #
+        heuristic_cost = problem.state_distance_to_goal(new_state)
+        children.append(Node(state=new_state, parent=node, action=action, path_cost=0, heuristic_cost=heuristic_cost))  # Append a new child node using the node constructor #
 
     return children

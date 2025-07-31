@@ -38,4 +38,7 @@ class Problem:
         return None  # There is no match this should never happen #
 
     def is_goal(self, state):
-        return state in self._goal_states # Seeing if the state is in the goal states #
+        return state in self._goal_states  # Seeing if the state is in the goal states #
+
+    def get_graph_diameter(self):
+        return self._graph.get_graph_diameter()  # Calls the graphs diameter function to get the diameter #

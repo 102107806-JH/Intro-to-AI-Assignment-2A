@@ -4,7 +4,7 @@ from textbook_abstractions.node import Node
 from data_structures.queues.lifo_queue import Stack
 from search_algorithms.helper_functions.node_depth import node_depth
 
-def depth_first_search(problem, expansion_depth_limit):
+def depth_first_search(problem, depth_limit):
     frontier = Stack()  # Frontier stack #
     frontier.push(Node(state=problem.initial_state))  # Push the initial node onto the stack #
     observed_states = {problem.initial_state : True}  # Dictionary for checking cycles in this problem the same state should never be encountered again #
@@ -16,7 +16,8 @@ def depth_first_search(problem, expansion_depth_limit):
         if problem.is_goal(node.state):  # If we are at the goal node return the node #
             return node
 
-        if node_depth(node) <= expansion_depth_limit:  # Only enable expansion if the node is less than or equal to expansion depth limit #
+        if node_depth(node) < depth_limit:  # Only enable expansion if the node is less than or equal to expansion depth limit
+            #  Nodes at the depth limit WILL BE EXPLORED JUST NOT EXPANDED #
 
             for child in sorted(expand(problem, node), key=lambda node:node.state, reverse=True):  # Children need to be explored in
                 # ascending order because stack is used need to push higher nodes first thus list needs reversing by state #

@@ -1,5 +1,4 @@
 from textbook_abstractions.problem import Problem
-from search_algorithms.helper_functions.expand import expand
 from textbook_abstractions.node import Node
 from data_structures.queues.lifo_queue import Stack
 from search_algorithms.helper_functions.node_depth import node_depth
@@ -28,6 +27,19 @@ def depth_first_search(problem, depth_limit):
                     observed_states[child.state] = True  # The pushed child has been on the frontier so indicate this in the dictionary #
 
     return None  # No solution has been found #
+
+def expand(problem, node):
+
+    state = node.state  # The state of the parent node #
+    children = []  # List to store all the child nodes #
+
+    for action in problem.actions(state):  # Go through all the states #
+
+        new_state = problem.result(state, action)  # Get the state that results from an action #
+        cost = node.path_cost + problem.action_cost(state, action, new_state)  # Get the path cost to the current node #
+        children.append(Node(state=new_state, parent=node, action=action, path_cost=cost))  # Append a new child node using the node constructor #
+
+    return children
 
 
 

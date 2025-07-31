@@ -45,7 +45,7 @@ def main():
     if method == "bfs":
         solution_node = breadth_first_search(problem)
     elif method == "dfs":
-        solution_node = depth_first_search(problem, depth=20)
+        solution_node = depth_first_search(problem, expansion_depth_limit=1)
     else:
         print(f"Error: Unknown search method '{method}'. Supported methods: bfs")
         sys.exit(1)

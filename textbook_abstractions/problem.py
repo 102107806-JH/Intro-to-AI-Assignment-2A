@@ -42,10 +42,11 @@ class Problem:
         state_vertex = self._graph.id_to_vertex(state)  # Get the vertex of the input state #
         min_distance = float('inf')  # Set the distance at infinity #
 
-        for goal_state in self._goal_states:
-            goal_vertex = self._graph.id_to_vertex(goal_state)
-            cur_distance = ((goal_vertex.x - state_vertex.x)**2 + (goal_vertex.y - state_vertex.y)**2) ** (0.5)
-            min_distance = min(min_distance, cur_distance)
+        for goal_state in self._goal_states:  # Go through all the goal states #
+
+            goal_vertex = self._graph.id_to_vertex(goal_state)  # Get the goal_vertex. This has the x and y data of the vertex #
+            cur_distance = ((goal_vertex.x - state_vertex.x)**2 + (goal_vertex.y - state_vertex.y)**2) ** (0.5)  # Calculate the Euclidean (straight line) distance to given goal for the state #
+            min_distance = min(min_distance, cur_distance)  # Getting the distance to the closest goal
 
         return min_distance
 

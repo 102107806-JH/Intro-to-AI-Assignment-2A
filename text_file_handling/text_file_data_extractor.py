@@ -88,7 +88,7 @@ class TextFileDataExtractor:
             elif c == ":":
                 continue
             elif c == "(":  # Cost has been extracted
-                cost = int(data_buffer)
+                cost = float(data_buffer)
                 adjacency_list_graph.insert_edge_into_vertex(origin_id, destination_id, cost)
                 # Insert a new edges into the graph #
                 data_buffer = ""

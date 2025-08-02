@@ -41,5 +41,17 @@ class TestDFS(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_goal_beyond_depth(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/goal_beyond_depth.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter() - 1, cycle_depth_limit=2)
+
+        expected_path_list = []  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+
+
 if __name__ == '__main__':
     unittest.main()

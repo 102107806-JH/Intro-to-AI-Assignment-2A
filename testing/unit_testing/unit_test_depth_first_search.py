@@ -21,10 +21,9 @@ class TestDFS(unittest.TestCase):
         path.reverse()
         return path
 
-    def test_case_1(self):
+    def test_assignment_example(self):
         # Problem generation and search execution
-        problem = self.generate_problem(
-            r"unit_testing_data/unit_test_demo.txt")
+        problem = self.generate_problem(r"unit_testing_data/assignment_example.txt")
         solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=2)
 
         expected_path_list = [2, 1, 3, 2, 1, 4]  # Expected path list #
@@ -32,13 +31,12 @@ class TestDFS(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
-    def test_case_2(self):
+    def test_unreachable_goal(self):
         # Problem generation and search execution
-        problem = self.generate_problem(
-            r"unit_testing_data/unit_test_demo.txt")
+        problem = self.generate_problem(r"unit_testing_data/unreachable_goal.txt")
         solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=2)
 
-        expected_path_list = [2, 1, 3, 2, 1, 5]  # Expected path list #
+        expected_path_list = []  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
 
         self.assertEqual(expected_path_list, actual_path_list)

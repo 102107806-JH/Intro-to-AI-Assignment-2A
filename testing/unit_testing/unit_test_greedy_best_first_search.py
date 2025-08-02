@@ -31,6 +31,16 @@ class TestDFS(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_unreachable_goal(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/unreachable_goal.txt")
+        solution_node = greed_best_first_search(problem)
+
+        expected_path_list = []  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
 
 if __name__ == '__main__':
     unittest.main()

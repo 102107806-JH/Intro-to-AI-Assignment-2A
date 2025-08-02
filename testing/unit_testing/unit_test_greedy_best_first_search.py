@@ -41,6 +41,16 @@ class TestDFS(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_ascending_order_expansion_when_all_else_equal(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/test_ascending_order_expansion_when_all_else_equal.txt")
+        solution_node = greed_best_first_search(problem)
+
+        expected_path_list = [1, 2, 4, 5, 7]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
 
 if __name__ == '__main__':
     unittest.main()

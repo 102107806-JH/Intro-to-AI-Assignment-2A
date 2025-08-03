@@ -26,7 +26,7 @@ class TestDFS(unittest.TestCase):
         problem = self.generate_problem(r"unit_testing_data/optimal_path_unreachable_goal.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [1, 2 ,8]  # Expected path list #
+        expected_path_list = [1, 3 ,4, 6, 7, 9, 8]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
 
         self.assertEqual(expected_path_list, actual_path_list)
@@ -47,6 +47,16 @@ class TestDFS(unittest.TestCase):
         solution_node = greed_best_first_search(problem)
 
         expected_path_list = [1, 2, 4, 5, 7]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_worse_greedy_path(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/worse_greedy_path.txt")
+        solution_node = greed_best_first_search(problem)
+
+        expected_path_list = [1, 4, 3, 5, 8, 9, 10, 7, 6]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
 
         self.assertEqual(expected_path_list, actual_path_list)

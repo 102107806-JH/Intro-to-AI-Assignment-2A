@@ -5,6 +5,7 @@ from textbook_abstractions.node import Node  # Import Node to access the static 
 from search_algorithms.breadth_first_search import breadth_first_search
 from search_algorithms.depth_first_search import depth_first_search
 from search_algorithms.greedy_best_first_search import greed_best_first_search
+from search_algorithms.weighted_A_star import weighted_A_star
 
 def get_solution_path(node):
     """
@@ -49,6 +50,8 @@ def main():
         solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=2)
     elif method == "gbfs":
         solution_node = greed_best_first_search(problem)
+    elif method == "wastar":
+        solution_node = weighted_A_star(problem, weight=2)
     else:
         print(f"Error: Unknown search method '{method}'. Supported methods: bfs")
         sys.exit(1)

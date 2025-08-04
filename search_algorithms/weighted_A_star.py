@@ -5,7 +5,7 @@ def weighted_A_star(problem, weight=1):
     node = Node(state=problem.initial_state)  # Initial node #
     frontier = PriorityQueue(key_lambda=lambda node:(node.total_cost, node.state))  # Frontier that takes the lambda as an arg that defines how the priority queue is sorted. In this case we dont need to worry about sorting by chronological order because it is impossible for the same state to occur twice #
     frontier.push(node)  # Push initial node onto the queue #
-    reached = {problem.initial_state : True}  # Dictionary that stores the reached state states #
+    reached = {problem.initial_state : node}  # Dictionary that stores the reached state states #
 
     while frontier.is_empty() == False:  # Continue until frontier is empty #
         node = frontier.pop()  # Pop the highest priority node #
@@ -16,8 +16,8 @@ def weighted_A_star(problem, weight=1):
         for child in expand(problem, node, weight):  # Expand popped nodes children #
             state = child.state  # Get the state of the current child #
 
-            if reached.get(state, False) == False or child.path_cost < reached[state]:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier OR if they have been encountered check if the current path costs less #
-                reached[state] = True  # Indicate that the node has been reached #
+            if reached.get(state, False) == False or child.path_cost < reached[state].path_cost:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier OR if they have been encountered check if the current path costs less #
+                reached[state] = child  # Indicate that the node has been reached #
                 frontier.push(child)  # Push node onto frontier #
 
     return None

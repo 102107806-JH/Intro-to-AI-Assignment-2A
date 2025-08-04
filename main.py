@@ -53,7 +53,6 @@ def main():
         solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=2)
     elif method == "gbfs":
         solution_node = greed_best_first_search(problem)
-
     elif method == "wastar":
         solution_node = weighted_A_star(problem, weight=2)
     elif method == "astar":

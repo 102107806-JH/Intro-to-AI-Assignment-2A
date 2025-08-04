@@ -54,7 +54,7 @@ def main():
     elif method == "gbfs":
         solution_node = greed_best_first_search(problem)
     elif method == "wastar":
-        solution_node = weighted_A_star(problem, weight=2)
+        solution_node = weighted_A_star(problem, weight=1)
     elif method == "astar":
         solution_node = a_star_search(problem)
     else:

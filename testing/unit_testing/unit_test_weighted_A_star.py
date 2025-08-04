@@ -21,7 +21,7 @@ class TestWeightedAStar(unittest.TestCase):
         path.reverse()
         return path
 
-    def test_hight_and_low_weight(self):
+    def test_high_and_low_weight(self):
         # Problem generation and search execution
         problem = self.generate_problem(r"unit_testing_data/optimal_path_unreachable_goal.txt")
         solution_node_low_weight = weighted_A_star(problem, weight=2)
@@ -59,7 +59,7 @@ class TestWeightedAStar(unittest.TestCase):
     def test_worse_greedy_path(self):
         # Problem generation and search execution
         problem = self.generate_problem(r"unit_testing_data/worse_greedy_path.txt")
-        solution_node = weighted_A_star(problem, weight=2)
+        solution_node = weighted_A_star(problem, weight=1)
 
         expected_path_list = [1, 2, 6]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #

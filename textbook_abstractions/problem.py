@@ -31,12 +31,16 @@ class Problem:
     def action_cost(self, state, action, new_state):
         destination_cost_pair_list = self._graph.get_edge_data(state)  # Get all destinations and their costs
         # associated with current state #
-
+        best_cost = float('inf')  # Could have multiple paths to the same destination from a given state #
         for pair in destination_cost_pair_list:  # Go through all the pairs in the cost pair list #
             if pair.destination_id == new_state:  # The destination and the new state match #
-                return pair.cost  # Return the cost associated with the pair
+                best_cost = min(best_cost, pair.cost)  # Get the best cost path to the destination #
 
-        return None  # There is no match this should never happen #
+        if best_cost != float('inf'):
+            return best_cost  # Return the best cost #
+        else:
+            raise Exception('Invalid action no resulting state!')  # There is no match this should never happen #
+
 
     def state_distance_to_goal(self, state):
         state_vertex = self._graph.id_to_vertex(state)  # Get the vertex of the input state #

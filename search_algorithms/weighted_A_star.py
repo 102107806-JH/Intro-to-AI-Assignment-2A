@@ -17,7 +17,7 @@ def weighted_A_star(problem, weight=1):
             state = child.state  # Get the state of the current child #
 
             if reached.get(state, False) == False or child.path_cost < reached[state].path_cost:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier OR if they have been encountered check if the current path costs less #
-                reached[state] = child  # Indicate that the node has been reached #
+                reached[state] = child  # Indicate that the node has been reached OR update the node for one that has the better path cost #
                 frontier.push(child)  # Push node onto frontier #
 
     return None

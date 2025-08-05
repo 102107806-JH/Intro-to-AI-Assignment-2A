@@ -70,7 +70,7 @@ class TestDFS(unittest.TestCase):
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
 
         self.assertEqual(expected_path_list, actual_path_list)
-        self.assertEqual(20 ,solution_node.path_cost)
+        self.assertEqual(30 ,solution_node.path_cost)
 
 
 

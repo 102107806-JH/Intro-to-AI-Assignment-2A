@@ -66,6 +66,25 @@ class TestWeightedAStar(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_better_node_popped_later(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/wastar_better_path_later_pop.txt")
+        solution_node = weighted_A_star(problem, weight=20)
+
+        expected_path_list = [1, 4, 2, 3]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_better_node_popped_later_v2(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/wastar_better_path_later_pop_v2.txt")
+        solution_node = weighted_A_star(problem, weight=20)
+
+        expected_path_list = [1, 6, 2, 3, 4, 5]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
 
 if __name__ == '__main__':
     unittest.main()

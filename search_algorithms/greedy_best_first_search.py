@@ -1,9 +1,9 @@
-from data_structures.queues.priority_que_JH import PriorityQueue
+from data_structures.queues.priority_queue_TS import PriorityQueue
 from textbook_abstractions.node import Node
 
 def greed_best_first_search(problem):
     node = Node(state=problem.initial_state)  # Initial node #
-    frontier = PriorityQueue(key_lambda=lambda node:(node.total_cost, node.state))  # Frontier that takes the lambda as an arg that defines how the priority queue is sorted. In this case we dont need to worry about sorting by chronological order because it is impossible for the same state to occur twice #
+    frontier = PriorityQueue()
     frontier.push(node)  # Push initial node onto the queue #
     reached = {problem.initial_state : node}  # Dictionary that stores the reached state states #
 

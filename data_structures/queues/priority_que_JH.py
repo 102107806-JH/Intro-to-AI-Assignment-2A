@@ -3,10 +3,13 @@ from turtledemo.penrose import start
 
 class PriorityQueue:
     def __init__(self, key_lambda):
-        self._collection = []
         self._key_lambda = key_lambda
+        self._collection = []
+        self._counter = 0
 
     def push(self, object):
+        object.order_pushed_into_collection = self._counter
+        self._counter += 1
         self._collection.append(object)
         self._collection = sorted(self._collection, key=self._key_lambda)
 

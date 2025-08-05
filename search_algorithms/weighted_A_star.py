@@ -18,7 +18,7 @@ def weighted_A_star(problem, weight=1):
 
             if state not in reached or child.path_cost < reached[state].path_cost:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier OR if they have been encountered check if the current path costs less #
 
-                if state in reached:  # The node is in reached this means that the path cost is less on the newly found node
+                if state in reached:  # The node is in reached this means that the path cost is less on the newly found node #
                     update_tree(new_node=child, old_node=reached[state])  # Calls the function that is responsible for updating the tree #
                 else:
                     frontier.push(child)  # Push node onto frontier (Nodes can only appear on the frontier once) #

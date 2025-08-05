@@ -2,13 +2,18 @@ class Node:
     # Class variable to keep track of the total number of Node instances created
     _node_count = 0
 
-    def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0):
+    def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0, use_path_cost_for_total_cost = True):
         self._state = state  # Node state
         self._parent = parent  # Parent node
         self._action = action  # Action that got the node from parent state to current node state
         self._path_cost = path_cost  # Path cost will need to be saved whereas heuristic cost won't
         self._heuristic_cost = heuristic_cost # Make sure to store it as a private attribute
-        self._total_cost = path_cost + heuristic_cost  # The total cost this is what the priority queue will sort by
+        self._use_path_cost_for_total_cost = use_path_cost_for_total_cost  # This is needed to signal whether the path cost is needed in the total cost later #
+
+        if use_path_cost_for_total_cost: # This is for gbfs where we want to record the path cost without using it in the total cost
+            self._total_cost = path_cost + heuristic_cost  # The total cost this is what the priority queue will sort by
+        else:
+            self._total_cost = heuristic_cost
         self._order_pushed_into_collection = None  # Used to indicate chronological order in which node was added to a specific collection
         self._children = []  # Stores the child nodes #
         # Increment the node count every time a new Node instance is created
@@ -18,7 +23,10 @@ class Node:
 
         for child in self._children:  # Go through each of the children #
             child.path_cost -= path_cost_difference  # Update the path cost difference #
-            child.total_cost -= path_cost_difference  # Subtract the difference in path cost from the total cost #
+
+            if self._use_path_cost_for_total_cost:  # Check whether the path cost should be used in the total cost #
+                child.total_cost -= path_cost_difference  # Subtract the difference in path cost from the total cost #
+
             child.update_subtree_cost(path_cost_difference)  # Recursive Call #
 
     def add_child(self, node):

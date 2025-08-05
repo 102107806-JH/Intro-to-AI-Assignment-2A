@@ -16,7 +16,7 @@ def greed_best_first_search(problem):
         for child in expand(problem, node):  # Expand popped nodes children #
             state = child.state  # Get the state of the current child #
 
-            if state not in reached:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier #
+            if reached.get(state, False) == False:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier #
                 reached[state] = child  # Indicate that the node has been reached #
                 frontier.push(child)  # Push node onto frontier #
 

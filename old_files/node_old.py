@@ -10,34 +10,9 @@ class Node:
         self._heuristic_cost = heuristic_cost # Make sure to store it as a private attribute
         self._total_cost = path_cost + heuristic_cost  # The total cost this is what the priority queue will sort by
         self._order_pushed_into_collection = None  # Used to indicate chronological order in which node was added to a specific collection
-        self._children = []  # Stores the child nodes #
+
         # Increment the node count every time a new Node instance is created
         Node._node_count += 1
-
-    def update_subtree_cost(self, path_cost_difference):
-
-        for child in self._children:  # Go through each of the children #
-            child.path_cost -= path_cost_difference  # Update the path cost difference #
-            child.total_cost -= path_cost_difference  # Subtract the difference in path cost from the total cost #
-            child.update_subtree_cost(path_cost_difference)  # Recursive Call #
-
-    def add_child(self, node):
-        self._children.append(node)  # Appends a child to the children list of the node #
-
-    def steal_children(self, old_node):
-        self._children = old_node.children  # Update the children #
-        old_node.children = None  # Set the old nodes children to None #
-        if self._children is not None:  # Make sure that there is children #
-            for child in self._children: # Go through every child #
-                child.parent = self  # Make this object the parent of every child #
-
-    @property
-    def children(self):
-        return self._children  # Get children list #
-
-    @children.setter
-    def children(self, children):
-        self._children = children  # Set children list #
 
     @property
     def state(self):
@@ -47,10 +22,6 @@ class Node:
     def parent(self):
         return self._parent
 
-    @parent.setter
-    def parent(self, parent):
-        self._parent = parent  # Set the parent of self #
-
     @property
     def action(self):
         return self._action
@@ -59,10 +30,6 @@ class Node:
     def path_cost(self):
         return self._path_cost
 
-    @path_cost.setter
-    def path_cost(self, path_cost):
-        self._path_cost = path_cost  # Set the path cost #
-
     @property
     def heuristic_cost(self):
         return self._heuristic_cost
@@ -70,10 +37,6 @@ class Node:
     @property
     def total_cost(self):
         return self._total_cost
-
-    @total_cost.setter
-    def total_cost(self, total_cost):
-        self._total_cost = total_cost  # Set the total cost #
 
     @property
     def order_pushed_into_collection(self):

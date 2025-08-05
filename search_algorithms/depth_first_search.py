@@ -27,7 +27,8 @@ def expand(problem, node):
 
     for action in problem.actions(state):  # Go through all the states #
         new_state = problem.result(state, action)  # Get the state that results from an action #
-        children.append(Node(state=new_state, parent=node, action=action))  # Append a new child node using the node constructor #
+        path_cost = node.path_cost + problem.action_cost(state, action, new_state)  # Get the total cost of the action plus all previous actions taken #
+        children.append(Node(state=new_state, parent=node, action=action, path_cost=path_cost))  # Append a new child node using the node constructor #
 
     return children
 

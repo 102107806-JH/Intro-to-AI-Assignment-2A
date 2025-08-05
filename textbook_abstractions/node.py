@@ -36,6 +36,7 @@ class Node:
     def steal_children(self, old_node):
         self._children = old_node.children  # Update the children #
         old_node.children = None  # Set the old nodes children to None #
+
         if self._children is not None:  # Make sure that there is children #
             for child in self._children: # Go through every child #
                 child.parent = self  # Make this object the parent of every child #

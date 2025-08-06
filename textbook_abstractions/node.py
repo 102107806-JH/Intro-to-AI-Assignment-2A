@@ -33,22 +33,30 @@ class Node:
     def add_child(self, node):
         self._children.append(node)  # Appends a child to the children list of the node #
 
-    def switch_node(self, old_node):
+    def give_path(self, old_node):
         #self._children = old_node.children  # Update the children #
         #old_node.children = []  # Set the old nodes children to an empty list #
 
         #for child in self._children: # Go through every child #
         #    child.parent = self  # Make this object the parent of every child #
-        for child in old_node.parent.children:
-            if child == old_node:
-                child = None
+        old_node.parent.children.remove(old_node) # Remove the old node from its parents children list
+        old_node.parent = self._parent  # Set the old nodes parent as this nodes parent
 
-        for child in self._parent.children:
-            if child == self:
-                child = old_node
+        self._parent.children.remove(self)  # Remove this node from its parents children list
+        self._parent = None  # Remove this nodes parent reference
 
-        old_node.parent = self._parent
-        del self
+        old_node.parent.add_child(old_node)  # Add the old node to its new parents children list
+
+    def steal_path(self, new_node):
+        self._parent.children.remove(self)
+        self._parent = new_node.parent
+
+        new_node.parent.children.remove(new_node)
+        new_node.parent = None
+
+        self._parent.add_child(self)
+
+
 
     @property
     def children(self):

@@ -15,6 +15,7 @@ def greed_best_first_search(problem):
 
         for child in expand(problem, node):  # Expand popped nodes children #
             state = child.state  # Get the state of the current child #
+            node.add_child(child)  # Add child to the node #
 
             if state not in reached or child.path_cost < reached[state].path_cost:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier OR if they have been encountered check if the current path costs less #
 
@@ -22,7 +23,6 @@ def greed_best_first_search(problem):
                     update_tree(new_node=child, old_node=reached[state])  # Calls the function that is responsible for updating the tree #
                 else:
                     frontier.push(child)  # Push node onto frontier (Nodes can only appear on the frontier once) #
-                    node.add_child(child)  # Add child to the node #
 
                 reached[state] = child  # Indicate that the node has been reached OR update the node for one that has the better path cost #
 
@@ -41,5 +41,6 @@ def expand(problem, node):
     return children
 
 def update_tree(new_node, old_node):
-    new_node.switch_node(old_node)  # Steals the old nodes children and sets the new node as their parent. Then sets the old nodes children to none #
-    new_node.update_subtree_cost(path_cost_difference=old_node.path_cost - new_node.path_cost)  # Updates the cost of all the nodes on the subtree #
+    #new_node.give_path(old_node)  # Steals the old nodes children and sets the new node as their parent. Then sets the old nodes children to none #
+    old_node.steal_path(new_node)
+    old_node.update_subtree_cost(path_cost_difference=old_node.path_cost - new_node.path_cost)  # Updates the cost of all the nodes on the subtree #

@@ -113,6 +113,26 @@ class TestDFS(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_multiple_goals_when_maximum_cycle_depth_check(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/multiple_goals.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=problem.get_graph_diameter())
+
+        expected_path_list = [1, 2, 3, 4]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_multiple_goals_when_minimum_cycle_depth_check(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/multiple_goals.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=0)
+
+        expected_path_list = [1, 2, 1, 2, 1, 2, 4]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
 
 
 if __name__ == '__main__':

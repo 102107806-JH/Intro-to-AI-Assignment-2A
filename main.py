@@ -2,12 +2,13 @@ import sys
 import os
 from text_file_handling.text_file_data_extractor import TextFileDataExtractor
 from textbook_abstractions.problem import Problem
-from textbook_abstractions.node import Node  # Import Node to access the static methods
+from textbook_abstractions.node import Node
 from search_algorithms.breadth_first_search import breadth_first_search
 from search_algorithms.depth_first_search import depth_first_search
 from search_algorithms.greedy_best_first_search import greed_best_first_search
 from search_algorithms.weighted_A_star import weighted_A_star
 from search_algorithms.a_star_search import a_star_search
+from search_algorithms.dijkstra_search import dijkstra_search  # Import the new algorithm
 
 
 def get_solution_path(node):
@@ -18,21 +19,19 @@ def get_solution_path(node):
     path = []
     current = node
     while current:
-        path.append(str(current.state))  # Convert to string for output
+        path.append(str(current.state))
         current = current.parent
-    return " ".join(path[::-1])  # Reverse the list to get start to goal order and join
+    return " ".join(path[::-1])
 
 
 def main():
-    # Ensure correct number of arguments
     if len(sys.argv) != 3:
         print("Usage: python main.py <filename> <method>")
         sys.exit(1)
 
     filename = sys.argv[1]
-    method = sys.argv[2].lower()  # Convert method to lowercase for case-insensitivity
+    method = sys.argv[2].lower()
 
-    # Reset node count before starting the search for a clean count
     Node.reset_node_count()
 
     try:
@@ -57,21 +56,17 @@ def main():
         solution_node = weighted_A_star(problem, weight=2)
     elif method == "astar":
         solution_node = a_star_search(problem)
+    elif method == "dijkstra":
+        solution_node = dijkstra_search(problem)
     else:
-        print(f"Error: Unknown search method '{method}'. Supported methods: bfs")
+        print(f"Error: Unknown search method '{method}'. Supported methods: bfs, dfs, gbfs, wastar, astar, dijkstra")
         sys.exit(1)
 
-    # Output results
     if solution_node:
-        # filename method
-        print(f"{filename.split('/')[-1]} {method}")  # Extract just the file name
-        # goal number_of_nodes
+        print(f"{filename.split('/')[-1]} {method}")
         print(f"{solution_node.state} {Node.get_node_count()}")
-        # path
         print(get_solution_path(solution_node))
     else:
-        # If no solution is found, print a failure message
-        # The prompt only specifies output for "when a goal can be reached".
         print(f"{filename.split('/')[-1]} {method}")
         print("No solution found.")
 

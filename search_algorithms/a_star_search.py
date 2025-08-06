@@ -9,7 +9,7 @@ def a_star_search(problem: Problem):
     Performs an A* search to find an optimal path from the initial state
     to a goal state. This implementation uses a graph search approach.
 
-    A* search algorithm formula was used from Page 72 of the textbook.
+    A* search algorithm formula was used from Page 89 of the textbook.
     f(n) = g(n) + h(n) where:
     g(n) is the path cost from the start node to node n.
     h(n) is an admissible heuristic estimate of the cost from node n to the closest goal.

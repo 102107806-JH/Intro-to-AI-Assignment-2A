@@ -29,8 +29,6 @@ class Node:
         for child in self._children:
             child.update_subtree_cost(path_cost_difference)  # Recursive call to update all children #
 
-
-
     def add_child(self, node):
         self._children.append(node)  # Appends a child to the children list of the node #
 

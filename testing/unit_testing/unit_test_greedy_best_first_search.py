@@ -94,7 +94,18 @@ class TestDFS(unittest.TestCase):
 
     def test_gbfs_better_pop_later_multiple_times(self):
         # Problem generation and search execution
-        problem = self.generate_problem(r"unit_testing_data/gbfs_better_pop_later_multiple_times.txt")
+        problem = self.generate_problem(
+            r"unit_testing_data/gbfs_better_pop_whilst_node_still_on_stack.txt")
+        solution_node = greed_best_first_search(problem)
+
+        expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_gbfs_better_pop_later_multiple_times(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/gbfs_better_pop_whilst_node_still_on_stack.txt")
         solution_node = greed_best_first_search(problem)
 
         expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]  # Expected path list #

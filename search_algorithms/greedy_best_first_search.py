@@ -41,5 +41,5 @@ def expand(problem, node):
     return children
 
 def update_tree(new_node, old_node):
-    new_node.steal_children(old_node)  # Steals the old nodes children and sets the new node as their parent. Then sets the old nodes children to none #
+    new_node.switch_node(old_node)  # Steals the old nodes children and sets the new node as their parent. Then sets the old nodes children to none #
     new_node.update_subtree_cost(path_cost_difference=old_node.path_cost - new_node.path_cost)  # Updates the cost of all the nodes on the subtree #

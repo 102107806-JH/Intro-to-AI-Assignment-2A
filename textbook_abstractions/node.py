@@ -33,12 +33,22 @@ class Node:
     def add_child(self, node):
         self._children.append(node)  # Appends a child to the children list of the node #
 
-    def steal_children(self, old_node):
-        self._children = old_node.children  # Update the children #
-        old_node.children = []  # Set the old nodes children to an empty list #
+    def switch_node(self, old_node):
+        #self._children = old_node.children  # Update the children #
+        #old_node.children = []  # Set the old nodes children to an empty list #
 
-        for child in self._children: # Go through every child #
-            child.parent = self  # Make this object the parent of every child #
+        #for child in self._children: # Go through every child #
+        #    child.parent = self  # Make this object the parent of every child #
+        for child in old_node.parent.children:
+            if child == old_node:
+                child = None
+
+        for child in self._parent.children:
+            if child == self:
+                child = old_node
+
+        old_node.parent = self._parent
+        del self
 
     @property
     def children(self):

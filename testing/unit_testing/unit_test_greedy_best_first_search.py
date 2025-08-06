@@ -82,6 +82,26 @@ class TestDFS(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_multiple_goals_and_tie_brake(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/multiple_goals.txt")
+        solution_node = greed_best_first_search(problem)
+
+        expected_path_list = [1, 2, 4]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_gbfs_better_pop_later_multiple_times(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/gbfs_better_pop_later_multiple_times.txt")
+        solution_node = greed_best_first_search(problem)
+
+        expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
 
 if __name__ == '__main__':
     unittest.main()

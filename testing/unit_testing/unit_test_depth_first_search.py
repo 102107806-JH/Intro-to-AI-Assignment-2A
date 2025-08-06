@@ -73,6 +73,66 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_list, actual_path_list)
         self.assertEqual(30 ,solution_node.path_cost)
 
+    def test_origin_is_goal(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/origin_is_goal.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=0)
+
+        expected_path_list = [1]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_unreachable_goal(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/unreachable_goal.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=0)
+
+        expected_path_list = []  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_potentially_infinite_loop_no_solution(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/dfs_potentially_infinite_loop_no_solution.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=0)
+
+        expected_path_list = []  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_no_cycles_when_cycle_depth_is_graph_diameter(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/dfs_no_cycles_when_cycle_depth_is_graph_diameter.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=problem.get_graph_diameter())
+
+        expected_path_list = [1, 2, 4, 5, 7]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_multiple_goals_when_maximum_cycle_depth_check(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/multiple_goals.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=problem.get_graph_diameter())
+
+        expected_path_list = [1, 2, 3, 4]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
+    def test_multiple_goals_when_minimum_cycle_depth_check(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/multiple_goals.txt")
+        solution_node = depth_first_search(problem, depth_limit=problem.get_graph_diameter(), cycle_depth_limit=0)
+
+        expected_path_list = [1, 2, 1, 2, 1, 2, 4]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
 
 
 if __name__ == '__main__':

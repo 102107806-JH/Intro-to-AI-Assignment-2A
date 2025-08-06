@@ -21,25 +21,25 @@ class Node:
         Node._node_count += 1
 
     def update_subtree_cost(self, path_cost_difference):
+        self._path_cost -= path_cost_difference  # Subtract the difference in path cost from the path cost #
 
-        for child in self._children:  # Go through each of the children #
-            child.path_cost -= path_cost_difference  # Update the path cost difference #
+        if self._use_path_cost_for_total_cost:  # Check whether the path cost should be used in the total cost #
+            self._total_cost -= path_cost_difference  # Subtract the difference in path cost from the total cost #
 
-            if self._use_path_cost_for_total_cost:  # Check whether the path cost should be used in the total cost #
-                child.total_cost -= path_cost_difference  # Subtract the difference in path cost from the total cost #
-
-            child.update_subtree_cost(path_cost_difference)  # Recursive Call #
+        for child in self._children:
+            child.update_subtree_cost(path_cost_difference)  # Recursive call to update all children #
 
     def add_child(self, node):
         self._children.append(node)  # Appends a child to the children list of the node #
 
-    def steal_children(self, old_node):
-        self._children = old_node.children  # Update the children #
-        old_node.children = None  # Set the old nodes children to None #
+    def steal_parent(self, victim_node):
+        self._parent.children.remove(self)  # Remove the self from parent list #
+        self._parent = victim_node.parent  # Set this objects parent to the victim nodes parent #
 
-        if self._children is not None:  # Make sure that there is children #
-            for child in self._children: # Go through every child #
-                child.parent = self  # Make this object the parent of every child #
+        victim_node.parent.children.remove(victim_node)  # Remove the victim node from its parents children list #
+        victim_node.parent = None  # Remove the victim nodes reference to their parent #
+
+        self._parent.add_child(self)  # Add this node to its parents children list #
 
     @property
     def children(self):

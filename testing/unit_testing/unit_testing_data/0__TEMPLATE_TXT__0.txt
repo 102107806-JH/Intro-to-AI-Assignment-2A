@@ -1,0 +1,12 @@
+Nodes:
+node_num: (x,y) <<<<<<<< Delete this
+: (,)
+Edges:
+(Origin,Destination): Path Cost <<<<<<<< Delete this
+(,):
+
+
+Origin:
+2
+Destinations:
+5; 4

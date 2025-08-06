@@ -87,5 +87,15 @@ class TestWeightedAStar(unittest.TestCase):
 
         self.assertEqual(expected_path_list, actual_path_list)
 
+    def test_origin_is_goal(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/origin_is_goal.txt")
+        solution_node = weighted_A_star(problem, weight=20)
+
+        expected_path_list = [1]  # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+
+        self.assertEqual(expected_path_list, actual_path_list)
+
 if __name__ == '__main__':
     unittest.main()

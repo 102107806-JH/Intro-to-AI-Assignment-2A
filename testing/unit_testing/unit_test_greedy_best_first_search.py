@@ -123,7 +123,7 @@ class TestDFS(unittest.TestCase):
         actual_path_cost = solution_node.path_cost
         self.assertEqual(expected_path_cost, actual_path_cost)
 
-    def test_gbfs_better_pop_later_multiple_times(self):
+    def test_gbfs_better_pop_whilst_node_still_on_stack(self):
         # Problem generation and search execution
         problem = self.generate_problem(r"unit_testing_data/gbfs_better_pop_whilst_node_still_on_stack.txt")
         solution_node = greed_best_first_search(problem)

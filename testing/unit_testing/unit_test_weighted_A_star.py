@@ -43,8 +43,8 @@ class TestWeightedAStar(unittest.TestCase):
 
         expected_path_list = []  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
-
         self.assertEqual(expected_path_list, actual_path_list)
+
 
     def test_ascending_order_expansion_when_all_else_equal(self):
         # Problem generation and search execution
@@ -54,8 +54,11 @@ class TestWeightedAStar(unittest.TestCase):
 
         expected_path_list = [1, 2, 4, 5, 7]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
-
         self.assertEqual(expected_path_list, actual_path_list)
+
+        expected_path_cost = 8
+        actual_path_cost = solution_node.path_cost
+        self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_worse_greedy_path(self):
         # Problem generation and search execution
@@ -64,8 +67,11 @@ class TestWeightedAStar(unittest.TestCase):
 
         expected_path_list = [1, 2, 6]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
-
         self.assertEqual(expected_path_list, actual_path_list)
+
+        expected_path_cost = 10
+        actual_path_cost = solution_node.path_cost
+        self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_better_node_popped_later(self):
         # Problem generation and search execution
@@ -74,8 +80,11 @@ class TestWeightedAStar(unittest.TestCase):
 
         expected_path_list = [1, 4, 2, 3]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
-
         self.assertEqual(expected_path_list, actual_path_list)
+
+        expected_path_cost = 1090
+        actual_path_cost = solution_node.path_cost
+        self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_better_node_popped_later_v2(self):
         # Problem generation and search execution
@@ -84,8 +93,11 @@ class TestWeightedAStar(unittest.TestCase):
 
         expected_path_list = [1, 6, 2, 3, 4, 5]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
-
         self.assertEqual(expected_path_list, actual_path_list)
+
+        expected_path_cost = 1093
+        actual_path_cost = solution_node.path_cost
+        self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_origin_is_goal(self):
         # Problem generation and search execution
@@ -94,8 +106,24 @@ class TestWeightedAStar(unittest.TestCase):
 
         expected_path_list = [1]  # Expected path list #
         actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
-
         self.assertEqual(expected_path_list, actual_path_list)
+
+        expected_path_cost = 0
+        actual_path_cost = solution_node.path_cost
+        self.assertEqual(expected_path_cost, actual_path_cost)
+
+    def test_wastar_better_path_multiple_times_one_after_pop_one_whilst_on_stack(self):
+        # Problem generation and search execution
+        problem = self.generate_problem(r"unit_testing_data/wastar_better_path_multiple_times_one_after_pop_one_whilst_on_stack.txt")
+        solution_node = weighted_A_star(problem, weight=20)
+
+        expected_path_list = [1, 4, 2, 3, 5, 8, 7]   # Expected path list #
+        actual_path_list = self.get_solution_path_list(solution_node)  # Resulting path list #
+        self.assertEqual(expected_path_list, actual_path_list)
+
+        expected_path_cost = 1250
+        actual_path_cost = solution_node.path_cost
+        self.assertEqual(expected_path_cost, actual_path_cost)
 
 if __name__ == '__main__':
     unittest.main()

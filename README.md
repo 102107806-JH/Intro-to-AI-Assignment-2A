@@ -5,3 +5,4 @@ How to run:
 3. run python main.py data/PathFinder-test.txt dfs - returns the Depth First Search
 4. run python main.py data/PathFinder-test.txt astar - returns the A* Search
 5. run python main.py data/PathFinder-test.txt gbfs - returns the Greedy Best First Search
+6. 

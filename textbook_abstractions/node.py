@@ -2,19 +2,24 @@ class Node:
     # Class variable to keep track of the total number of Node instances created
     _node_count = 0
 
-    def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0, use_path_cost_for_total_cost = True, node_depth = 0):
+    def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0, use_path_cost_for_total_cost=True, node_depth=0):
         self._state = state  # Node state
         self._parent = parent  # Parent node
         self._action = action  # Action that got the node from parent state to current node state
         self._path_cost = path_cost  # Path cost will need to be saved whereas heuristic cost won't
-        self._heuristic_cost = heuristic_cost # Make sure to store it as a private attribute
+        self._heuristic_cost = heuristic_cost  # Make sure to store it as a private attribute
         self._use_path_cost_for_total_cost = use_path_cost_for_total_cost  # This is needed to signal whether the path cost is needed in the total cost later #
         self._node_depth = node_depth  # Node depth stored in the node so that it doesn't have to be calculated recursively #
 
-        if use_path_cost_for_total_cost: # This is for gbfs where we want to record the path cost without using it in the total cost
-            self._total_cost = path_cost + heuristic_cost  # The total cost this is what the priority queue will sort by
+        # --- FIX START ---
+        # A* search requires the total cost to be g(n) + h(n).
+        # We ensure this is calculated correctly when the flag is True.
+        if use_path_cost_for_total_cost:
+            self._total_cost = path_cost + heuristic_cost  # The total cost (f-value)
         else:
             self._total_cost = heuristic_cost
+        # --- FIX END ---
+
         self._order_pushed_into_collection = None  # Used to indicate chronological order in which node was added to a specific collection
         self._children = []  # Stores the child nodes #
         # Increment the node count every time a new Node instance is created

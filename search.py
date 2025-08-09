@@ -1,5 +1,4 @@
 import sys
-import os
 from text_file_handling.text_file_data_extractor import TextFileDataExtractor
 from textbook_abstractions.problem import Problem
 from textbook_abstractions.node import Node
@@ -8,7 +7,7 @@ from search_algorithms.depth_first_search import depth_first_search
 from search_algorithms.greedy_best_first_search import greed_best_first_search
 from search_algorithms.weighted_A_star import weighted_A_star
 from search_algorithms.a_star_search import a_star_search
-from search_algorithms.dijkstra_search import dijkstra_search  # Import the new algorithm
+from search_algorithms.dijkstra_search import dijkstra_search
 
 
 def get_solution_path(node):
@@ -26,12 +25,11 @@ def get_solution_path(node):
 
 def main():
     if len(sys.argv) != 3:
-        print("Usage: python main.py <filename> <method>")
+        print("Usage: python search.py <filename> <method>")
         sys.exit(1)
 
     filename = sys.argv[1]
     method = sys.argv[2].lower()
-
     Node.reset_node_count()
 
     try:
@@ -45,7 +43,6 @@ def main():
         print(f"Error processing file '{filename}': {e}")
         sys.exit(1)
 
-    solution_node = None
     if method == "bfs":
         solution_node = breadth_first_search(problem)
     elif method == "dfs":

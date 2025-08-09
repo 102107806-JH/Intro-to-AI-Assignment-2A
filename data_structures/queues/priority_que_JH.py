@@ -22,5 +22,6 @@ class PriorityQueue:
     def get_collection_states_cost(self):  # Helper function for testing that will be removed in the full version #
         states = []
         for node in self._collection:
-            states.append(("state: " + str(node.state), "total cost: " + str(node.total_cost), "path cost: " + str(node.path_cost)))
+            states.append(("state: " + str(node.state), "total cost: " + str(node.total_cost),
+                           "path cost: " + str(node.path_cost)))
         return states

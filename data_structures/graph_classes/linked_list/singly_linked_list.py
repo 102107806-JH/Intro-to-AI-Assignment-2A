@@ -1,5 +1,6 @@
 from data_structures.graph_classes.linked_list.list_node import ListNode
 
+
 class SinglyLinkedList:
     def __init__(self):
         self._head = None  # Head of the singly linked list #

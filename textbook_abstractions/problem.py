@@ -1,4 +1,3 @@
-
 class Problem:
     def __init__(self, extracted_text_file_data_object):  # Takes an extracted text file object  #
         self._graph = extracted_text_file_data_object.adjacency_list_graph  # Store a reference to the graph  #
@@ -41,22 +40,21 @@ class Problem:
         else:
             raise Exception('Invalid action no resulting state!')  # There is no match this should never happen #
 
-
     def state_distance_to_goal(self, state):
         state_vertex = self._graph.id_to_vertex(state)  # Get the vertex of the input state #
         min_distance = float('inf')  # Set the distance at infinity #
 
         for goal_state in self._goal_states:  # Go through all the goal states #
 
-            goal_vertex = self._graph.id_to_vertex(goal_state)  # Get the goal_vertex. This has the x and y data of the vertex #
-            cur_distance = ((goal_vertex.x - state_vertex.x)**2 + (goal_vertex.y - state_vertex.y)**2) ** (0.5)  # Calculate the Euclidean (straight line) distance to given goal for the state #
+            goal_vertex = self._graph.id_to_vertex(goal_state)
+            cur_distance = ((goal_vertex.x - state_vertex.x) ** 2 + (goal_vertex.y - state_vertex.y) ** 2) ** 0.5
+            # Calculate the Euclidean (straight line) distance to given goal for the state #
             min_distance = min(min_distance, cur_distance)  # Getting the distance to the closest goal
 
         return min_distance
-
 
     def is_goal(self, state):
         return state in self._goal_states  # Seeing if the state is in the goal states #
 
     def get_graph_diameter(self):
-        return self._graph.get_graph_diameter()  # Calls the graphs diameter function to get the diameter #
+        return self._graph.get_graph_diameter()  # Calls the graphs' diameter function to get the diameter #

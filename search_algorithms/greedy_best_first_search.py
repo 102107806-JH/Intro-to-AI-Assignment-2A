@@ -3,9 +3,12 @@ from textbook_abstractions.node import Node
 
 def greed_best_first_search(problem):
     node = Node(state=problem.initial_state)  # Initial node #
-    frontier = PriorityQueue(key_lambda=lambda node:(node.total_cost, node.state, node.order_pushed_into_collection))  # Frontier that takes the lambda as an arg that defines how the priority queue is sorted. In this case we dont need to worry about sorting by chronological order because it is impossible for the same state to occur twice #
+    frontier = PriorityQueue(key_lambda=lambda node:(node.total_cost, node.state, node.order_pushed_into_collection))
+    # Frontier that takes the lambda as an arg that defines how the priority queue is sorted.
+    # In this case we don't need to worry about sorting by chronological order because it is impossible
+    # for the same state to occur twice #
     frontier.push(node)  # Push initial node onto the queue #
-    reached = {problem.initial_state : node}  # Dictionary that stores the reached state states #
+    reached = {problem.initial_state: node}  # Dictionary that stores the reached state states #
 
     while frontier.is_empty() == False:  # Continue until frontier is empty #
         node = frontier.pop()  # Pop the highest priority node #
@@ -16,15 +19,20 @@ def greed_best_first_search(problem):
         for child in expand(problem, node):  # Expand popped nodes children #
             state = child.state  # Get the state of the current child #
 
-            if state not in reached or child.path_cost < reached[state].path_cost:  # Make sure that the frontier nodes have not been encountered before pushing them onto frontier OR if they have been encountered check if the current path costs less #
+            if state not in reached or child.path_cost < reached[state].path_cost:
+                # Make sure that the frontier nodes have not been encountered before pushing them onto frontier
+                # OR if they have been encountered check if the current path costs less #
                 node.add_child(child)  # Add child to the node #
 
-                if state in reached:  # The node is in reached this means that the path cost is less on the newly found node #
-                    update_tree(new_node=child, old_node=reached[state])  # Calls the function that is responsible for updating the tree #
+                if state in reached:
+                    # The node is in reached this means that the path cost is less on the newly found node #
+                    update_tree(new_node=child, old_node=reached[state])
+                    # Calls the function that is responsible for updating the tree #
                 else:
                     frontier.push(child)  # Push node onto frontier (Nodes can only appear on the frontier once) #
 
-                reached[state] = child  # Indicate that the node has been reached OR update the node for one that has the better path cost #
+                reached[state] = child  # Indicate that the node has been reached
+                # OR update the node for one that has the better path cost #
 
     return None
 
@@ -34,12 +42,14 @@ def expand(problem, node):
 
     for action in problem.actions(state):  # Go through all the states #
         new_state = problem.result(state, action)  # Get the state that results from an action #
-        path_cost = node.path_cost + problem.action_cost(state, action, new_state)  # Calculate the path cost IT IS NOT USED TO CALCULATE TOTAL COST #
-        heuristic_cost = problem.state_distance_to_goal(new_state)  # Get the heuristic (straight line distance) for the expanded node #
+        path_cost = node.path_cost + problem.action_cost(state, action, new_state)  # Calculate the path cost
+        # IT IS NOT USED TO CALCULATE TOTAL COST #
+        heuristic_cost = problem.state_distance_to_goal(new_state)  # Heuristic expanded node (straight line distance) #
         children.append(Node(state=new_state, parent=node, action=action, path_cost=path_cost, heuristic_cost=heuristic_cost, use_path_cost_for_total_cost=False))  # Append a new child node using the node constructor. Path cost is not recorded we are only interested in heuristic #
 
     return children
 
 def update_tree(new_node, old_node):
     old_node.steal_parent(new_node)  # Steal the new nodes parent node and give it to the old #
-    old_node.update_subtree_cost(path_cost_difference=old_node.path_cost - new_node.path_cost)  # Updates the cost of all the nodes on the subtree #
+    old_node.update_subtree_cost(path_cost_difference=old_node.path_cost - new_node.path_cost)
+    # Updates the cost of all the nodes on the subtree #

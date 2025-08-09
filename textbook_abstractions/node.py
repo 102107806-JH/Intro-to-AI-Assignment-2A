@@ -2,25 +2,25 @@ class Node:
     # Class variable to keep track of the total number of Node instances created
     _node_count = 0
 
-    def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0, use_path_cost_for_total_cost=True, node_depth=0):
+    def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0,
+                 use_path_cost_for_total_cost=True, node_depth=0):
         self._state = state  # Node state
         self._parent = parent  # Parent node
         self._action = action  # Action that got the node from parent state to current node state
         self._path_cost = path_cost  # Path cost will need to be saved whereas heuristic cost won't
         self._heuristic_cost = heuristic_cost  # Make sure to store it as a private attribute
-        self._use_path_cost_for_total_cost = use_path_cost_for_total_cost  # This is needed to signal whether the path cost is needed in the total cost later #
-        self._node_depth = node_depth  # Node depth stored in the node so that it doesn't have to be calculated recursively #
+        self._use_path_cost_for_total_cost = use_path_cost_for_total_cost
+        # This is needed to signal whether the path cost is needed in the total cost later #
+        self._node_depth = node_depth
+        # Node depth stored in the node so that it doesn't have to be calculated recursively #
 
-        # --- FIX START ---
-        # A* search requires the total cost to be g(n) + h(n).
-        # We ensure this is calculated correctly when the flag is True.
         if use_path_cost_for_total_cost:
             self._total_cost = path_cost + heuristic_cost  # The total cost (f-value)
         else:
             self._total_cost = heuristic_cost
-        # --- FIX END ---
 
-        self._order_pushed_into_collection = None  # Used to indicate chronological order in which node was added to a specific collection
+        self._order_pushed_into_collection = None
+        # Used to indicate chronological order in which node was added to a specific collection
         self._children = []  # Stores the child nodes #
         # Increment the node count every time a new Node instance is created
         Node._node_count += 1
@@ -103,17 +103,15 @@ class Node:
         self._order_pushed_into_collection = order_pushed_into_collection
 
     @staticmethod
-    def get_node_count():
-        """Returns the total number of Node instances created so far."""
+    def get_node_count():  # Returns the total number of Node instances created so far
         return Node._node_count
 
     @staticmethod
-    def reset_node_count():
-        """Resets the total number of Node instances created to 0."""
+    def reset_node_count():  # Resets the total number of Node instances created to 0
         Node._node_count = 0
 
     def __lt__(self, other):
-        # This method defines how one Node object is "less than" another.
-        # It's used by heapq in A* search when comparing the 3rd element of the tuple for Note 2 requirement.
+        # Defines how one Node object is "less than" another
+        # used by heapq in A* search when comparing the 3rd element of the tuple for Note 2 requirement
         if self.total_cost != other.total_cost:
             return self.total_cost < other.total_cost

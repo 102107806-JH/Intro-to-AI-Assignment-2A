@@ -21,5 +21,6 @@ class AdjacencyListGraph:
         return self._adjacency_list[id - 1]  # Converting the vertex id into a list index.
         # The id is 1 base so -1 to get it to zero based
 
+        # Len gives the number of graph nodes. The subtracting 1 gives the diameter #
     def get_graph_diameter(self):
-        return len(self._adjacency_list) - 1 # Len gives the number of graph nodes. The subtracting 1 gives the diameter #
+        return len(self._adjacency_list) - 1

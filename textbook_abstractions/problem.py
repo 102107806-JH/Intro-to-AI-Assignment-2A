@@ -49,7 +49,7 @@ class Problem:
             goal_vertex = self._graph.id_to_vertex(goal_state)
             cur_distance = ((goal_vertex.x - state_vertex.x) ** 2 + (goal_vertex.y - state_vertex.y) ** 2) ** 0.5
             # Calculate the Euclidean (straight line) distance to given goal for the state #
-            min_distance = min(min_distance, cur_distance)  # Getting the distance to the closest goal
+            min_distance = min(min_distance, cur_distance)  # Getting the distance to the closest goal #
 
         return min_distance
 

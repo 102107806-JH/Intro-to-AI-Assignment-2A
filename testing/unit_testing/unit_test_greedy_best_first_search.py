@@ -37,22 +37,20 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_unreachable_goal(self):
-        # Problem generation and search execution
         problem = generate_problem(r"unit_testing_data/unreachable_goal.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = []  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = []
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
     def test_ascending_order_expansion_when_all_else_equal(self):
-        # Problem generation and search execution
         problem = generate_problem(
             r"unit_testing_data/ascending_order_expansion_when_all_else_equal.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [1, 2, 4, 5, 7]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [1, 2, 4, 5, 7]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 8
@@ -60,12 +58,11 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_worse_greedy_path(self):
-        # Problem generation and search execution
         problem = generate_problem(r"unit_testing_data/worse_greedy_path.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [1, 4, 3, 5, 8, 9, 10, 7, 6]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [1, 4, 3, 5, 8, 9, 10, 7, 6]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 40
@@ -73,12 +70,11 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_gbfs_better_pop_later(self):
-        # Problem generation and search execution
         problem = generate_problem(r"unit_testing_data/gbfs_better_pop_later.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [5, 6, 3, 1, 4]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [5, 6, 3, 1, 4]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 96
@@ -86,12 +82,11 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_origin_is_goal(self):
-        # Problem generation and search execution
         problem = generate_problem(r"unit_testing_data/origin_is_goal.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [1]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [1]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 0
@@ -99,12 +94,11 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_multiple_goals_and_tie_brake(self):
-        # Problem generation and search execution
         problem = generate_problem(r"unit_testing_data/multiple_goals.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [1, 2, 4]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [1, 2, 4]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 15
@@ -112,13 +106,12 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_gbfs_better_pop_later_multiple_times(self):
-        # Problem generation and search execution
         problem = generate_problem(
             r"unit_testing_data/gbfs_better_pop_whilst_node_still_on_stack.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 194
@@ -126,12 +119,11 @@ class TestDFS(unittest.TestCase):
         self.assertEqual(expected_path_cost, actual_path_cost)
 
     def test_gbfs_better_pop_whilst_node_still_on_stack(self):
-        # Problem generation and search execution
         problem = generate_problem(r"unit_testing_data/gbfs_better_pop_whilst_node_still_on_stack.txt")
         solution_node = greed_best_first_search(problem)
 
-        expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]  # Expected path list #
-        actual_path_list = get_solution_path_list(solution_node)  # Resulting path list #
+        expected_path_list = [5, 6, 3, 1, 4, 11, 12, 9, 7, 10]
+        actual_path_list = get_solution_path_list(solution_node)
         self.assertEqual(expected_path_list, actual_path_list)
 
         expected_path_cost = 194

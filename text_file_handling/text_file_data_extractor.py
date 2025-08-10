@@ -80,14 +80,14 @@ class TextFileDataExtractor:
             if c == ",":  # Origin id has been found
                 origin_id = int(data_buffer)
                 data_buffer = ""  # Clear the data buffer #
-                continue  # Ensure that char is not added to data buffer (All continues to do the same) #
+                continue  # Ensure that char is not added to data buffer (All continues do the same) #
             elif c == ")":
                 destination_id = int(data_buffer)
                 data_buffer = ""
                 continue
             elif c == ":":
                 continue
-            elif c == "(":  # Cost has been extracted
+            elif c == "(":  # Cost has been extracted #
                 cost = float(data_buffer)
                 adjacency_list_graph.insert_edge_into_vertex(origin_id, destination_id, cost)
                 # Insert a new edges into the graph #

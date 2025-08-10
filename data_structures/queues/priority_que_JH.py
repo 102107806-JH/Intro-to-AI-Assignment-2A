@@ -19,7 +19,7 @@ class PriorityQueue:
     def is_empty(self):
         return len(self._collection) == 0
 
-    def get_collection_states_cost(self):  # Helper function for testing that will be removed in the full version #
+    def get_collection_states_cost(self):  # Helper function for testing #
         states = []
         for node in self._collection:
             states.append(("state: " + str(node.state), "total cost: " + str(node.total_cost),

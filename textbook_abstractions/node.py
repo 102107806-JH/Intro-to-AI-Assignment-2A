@@ -4,20 +4,20 @@ class Node:
 
     def __init__(self, state, parent=None, action=None, path_cost=0, heuristic_cost=0,
                  use_path_cost_for_total_cost=True, node_depth=0):
-        self._state = state  # Node state
-        self._parent = parent  # Parent node
-        self._action = action  # Action that got the node from parent state to current node state
-        self._path_cost = path_cost  # Path cost will need to be saved whereas heuristic cost won't
-        self._heuristic_cost = heuristic_cost  # Make sure to store it as a private attribute
+        self._state = state  # Node state #
+        self._parent = parent  # Parent node #
+        self._action = action  # Action that got the node from parent state to current node state #
+        self._path_cost = path_cost  # Path cost will need to be saved whereas heuristic cost won't #
+        self._heuristic_cost = heuristic_cost
         self._use_path_cost_for_total_cost = use_path_cost_for_total_cost
         # This is needed to signal whether the path cost is needed in the total cost later #
         self._node_depth = node_depth
-        # Node depth stored in the node so that it doesn't have to be calculated recursively #
-
+        # Node depth stored in the node so that it doesn't have to be calculated afterward #
+        # Determine whether to use the path cost in the f(n) calculation
         if use_path_cost_for_total_cost:
-            self._total_cost = path_cost + heuristic_cost  # The total cost (f-value)
+            self._total_cost = path_cost + heuristic_cost  # The total cost (f-value) #
         else:
-            self._total_cost = heuristic_cost
+            self._total_cost = heuristic_cost # The total cost (f-value) #
 
         self._order_pushed_into_collection = None
         # Used to indicate chronological order in which node was added to a specific collection
@@ -48,11 +48,11 @@ class Node:
 
     @property
     def children(self):
-        return self._children  # Get children list #
+        return self._children
 
     @children.setter
     def children(self, children):
-        self._children = children  # Set children list #
+        self._children = children
 
     @property
     def state(self):
@@ -68,7 +68,7 @@ class Node:
 
     @parent.setter
     def parent(self, parent):
-        self._parent = parent  # Set the parent of self #
+        self._parent = parent
 
     @property
     def action(self):
@@ -80,7 +80,7 @@ class Node:
 
     @path_cost.setter
     def path_cost(self, path_cost):
-        self._path_cost = path_cost  # Set the path cost #
+        self._path_cost = path_cost
 
     @property
     def heuristic_cost(self):
@@ -92,7 +92,7 @@ class Node:
 
     @total_cost.setter
     def total_cost(self, total_cost):
-        self._total_cost = total_cost  # Set the total cost #
+        self._total_cost = total_cost
 
     @property
     def order_pushed_into_collection(self):

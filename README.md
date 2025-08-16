@@ -1,5 +1,5 @@
 Project Directory Structure:
-    <Project>
+`    <Project>
        | data/: Contains .txt files that define the graphs and problems used for testing and execution.
        | data_structures/: Holds custom data structures for each search algorithm.
        |-->     graph_classes/: Contains the adjacency_list.py and other files for the graph representation.
@@ -10,7 +10,7 @@ Project Directory Structure:
        | text_file_handling/: Contains the text_file_data_extractor.py for parsing the problem text files.
        | textbook_abstractions/: Contains node.py and problem.py which are the abstractions used in the textbook.
        | old_files/: Contains the old files that were used for testing purposes and are not currently implemented in the 
-         final solution, they may be disregarded or used as evidence of development.
+         final solution, they may be disregarded or used as evidence of development.`
 
 
 How to Run Unit Tests:
